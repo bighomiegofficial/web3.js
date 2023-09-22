@@ -1,0 +1,8 @@
+<<<<<<<+HEAD
+# For details about the contents of this file, see
+=======
+>>>>>>> c44abcdc92907048676f9c324a250a8df2c98500
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Automatically assigns members of the web3.js team to new pending PRs as reviewers
+* @avkos @jdevcs @luu-alex @Muhammad-Altabba

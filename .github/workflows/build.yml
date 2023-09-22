@@ -1,0 +1,371 @@
+name: 'Build'
+on:
+<<<<<<<+4.x
+  push:
+    branches:
+      - '4.x'
+    tags:
+      - v4*
+  pull_request:
+    branches:
+      - '4.x'
+    types: [opened, reopened, synchronize]
+
+=======
+    push:
+        branches:
+            - "1.x"
+        tags:
+            - v1*
+        paths-ignore:
+            - "docs/**"
+            - "assets/**"
+            - "**.md"
+    pull_request:
+        branches:
+            - "1.x"
+        types: [opened, reopened, synchronize]
+        paths-ignore:
+            - "docs/**"
+            - "assets/**"
+            - "**.md"
+>>>>>>>+origin/1.x
+jobs:
+  build:
+    strategy:
+      matrix:
+        node: [18, 16]
+    name: Build CJS
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+          cache: yarn
+      - run: yarn install --ignore-scripts
+      - run: yarn prebuild
+      - run: yarn build:cjs
+      - run: tar -czf /tmp/web3-${{ matrix.node }}.js.tar.gz --exclude="./.git" ./
+      - uses: actions/upload-artifact@v3
+        with:
+          name: web3-${{ matrix.node }}.js.tar.gz
+          path: /tmp/web3-${{ matrix.node }}.js.tar.gz
+  build-esm:
+      name: Build ESM
+      needs: build
+      runs-on: ubuntu-latest
+      strategy:
+          matrix:
+              node: [ 18, 16 ]
+      steps:
+          -   uses: actions/setup-node@v3
+              with:
+<<<<<<<+4.x
+                node-version: ${{ matrix.node }}
+          -   uses: actions/download-artifact@v3
+              with:
+                name: web3-${{ matrix.node }}.js.tar.gz
+                path: /tmp
+          -   run: tar -xf /tmp/web3-${{ matrix.node }}.js.tar.gz -C ./
+          -   run: yarn build:esm
+  build-types:
+      name: Build Types
+      needs: build
+      runs-on: ubuntu-latest
+      strategy:
+          matrix:
+              node: [ 18, 16 ]
+      steps:
+          -   uses: actions/setup-node@v3
+=======
+                  node-version: 16
+            - uses: actions/checkout@v2
+
+            - uses: actions/cache@v2
+              id: cache-deps
+              with:
+                  path: |
+                      node_modules
+                      */*/node_modules
+                  key: ${{ runner.os }}-node16-${{ hashFiles('**/package-lock.json') }}
+
+            - run: npm ci
+              if: steps.cache-deps.outputs.cache-hit != 'true'
+
+            - run: bash ./scripts/ci.sh
+    unit:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node: [16, 18]
+        env:
+            TEST: "unit"
+        steps:
+            - uses: actions/setup-node@v1
+>>>>>>>+origin/1.x
+              with:
+                node-version: ${{ matrix.node }}
+          -   uses: actions/download-artifact@v3
+              with:
+                name: web3-${{ matrix.node }}.js.tar.gz
+                path: /tmp
+          -   run: tar -xf /tmp/web3-${{ matrix.node }}.js.tar.gz -C ./
+          -   run: yarn build:types
+  lint:
+      name: Lint
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+          -   uses: actions/setup-node@v3
+              with:
+                node-version: 18
+          -   uses: actions/download-artifact@v3
+              with:
+                name: web3-18.js.tar.gz
+                path: /tmp
+          -   run: tar -xf /tmp/web3-18.js.tar.gz -C ./
+          -   run: yarn lint
+
+  build-web:
+    name: Build Web
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+        -   uses: actions/setup-node@v3
+            with:
+              node-version: 18
+        -   uses: actions/download-artifact@v3
+            with:
+              name: web3-18.js.tar.gz
+              path: /tmp
+        -   run: tar -xf /tmp/web3-18.js.tar.gz -C ./
+        -   name: Restore default branch stats
+            if: github.event_name != 'push'
+            uses: actions/cache/restore@v3
+            with:
+              path: packages/web3/dist/4.x.json
+              key: web3-bundle-stats-4x-${{github.event.pull_request.base.sha}}
+        -   run: yarn build:web:analyze
+            env:
+              STATS_FILE: ${{ github.ref_name }}.json
+        -   name: Compare bundle stats
+            uses: github/webpack-bundlesize-compare-action@v1
+            if: github.event_name != 'push'
+            continue-on-error: true
+            with:
+              github-token: ${{ secrets.GITHUB_TOKEN }}
+              current-stats-json-path: "packages/web3/dist/${{ github.ref_name }}.json"
+              base-stats-json-path: "packages/web3/dist/4.x.json"
+        -   name: Cache default branch stats
+            uses: actions/cache/save@v3
+            if: github.event_name == 'push' && github.ref == 'refs/heads/4.x'
+            with:
+              path: packages/web3/dist/4.x.json
+              key: web3-bundle-stats-4x-${{github.sha}}
+
+<<<<<<<+4.x
+  unit:
+    name: Unit Tests
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [18, 16]
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: actions/download-artifact@v3
+        with:
+          name: web3-${{ matrix.node }}.js.tar.gz
+          path: /tmp
+      - run: tar -xf /tmp/web3-${{ matrix.node }}.js.tar.gz -C ./
+      - run: yarn test:unit
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          flags: UnitTests
+          token: ${{ secrets.CODECOV_TOKEN }}
+        if: ${{ matrix.node == 18 }}
+
+  integration:
+    name: Integration
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      INFURA_GOERLI_HTTP: ${{ secrets.INFURA_GOERLI_HTTP }}
+      INFURA_GOERLI_WS: ${{ secrets.INFURA_GOERLI_WS }}
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [18, 16]
+        backend: ['geth', 'ganache']
+        mode: ['http', 'ws']
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: actions/download-artifact@v3
+        with:
+          name: web3-${{ matrix.node }}.js.tar.gz
+          path: /tmp
+      - run: tar -xf /tmp/web3-${{ matrix.node }}.js.tar.gz -C ./
+      - run: yarn test:e2e:${{ matrix.backend }}:${{ matrix.mode }}
+        shell: bash
+=======
+            - run: bash ./scripts/ci.sh
+    e2e:
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                testCmd:
+                  [
+                      'unit_and_e2e_clients',
+                      'e2e_browsers',
+                      'e2e_ganache',
+                      'e2e_mosaic',
+                    #'e2e_gnosis_dex',
+                  ]
+        env:
+            TEST: ${{ matrix.testCmd }}
+            INFURA_HTTP: ${{ secrets.INFURA_HTTP }}
+        steps:
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: 16
+            - uses: actions/checkout@v2
+            - uses: browser-actions/setup-firefox@latest
+              if: matrix.testCmd == 'e2e_browsers'
+            - uses: actions/cache@v2
+              id: cache-deps
+              if: env.TEST == 'unit_and_e2e_clients' || env.TEST == 'e2e_browsers'
+              with:
+                  path: |
+                      node_modules
+                      */*/node_modules
+                  key: ${{ runner.os }}-node16-${{ hashFiles('**/package-lock.json') }}
+>>>>>>>+origin/1.x
+
+  e2e-ipc:
+    name: Integration IPC
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      INFURA_GOERLI_HTTP: ${{ secrets.INFURA_GOERLI_HTTP }}
+      INFURA_GOERLI_WS: ${{ secrets.INFURA_GOERLI_WS }}
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [ 18, 16 ]
+        backend: [ 'geth' ]
+        mode: [ 'ipc' ]
+    steps:
+      -   uses: actions/setup-node@v3
+          with:
+            node-version: ${{ matrix.node }}
+      -   uses: actions/download-artifact@v3
+          with:
+            name: web3-${{ matrix.node }}.js.tar.gz
+            path: /tmp
+      -   run: tar -xf /tmp/web3-${{ matrix.node }}.js.tar.gz -C ./
+      -   run: yarn test:e2e:${{ matrix.backend }}:${{ matrix.mode }}
+          shell: bash
+
+  e2e:
+    name: End-to-End ganache:ws
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [18, 16]
+        browser: ['electron', 'chrome', 'firefox']
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+            node-version: ${{ matrix.node }}
+      - uses: browser-actions/setup-firefox@latest
+        if: matrix.browser == 'firefox'
+      - uses: actions/download-artifact@v3
+        with:
+          name: web3-${{ matrix.node }}.js.tar.gz
+          path: /tmp
+      - run: tar -xf /tmp/web3-${{ matrix.node }}.js.tar.gz -C ./
+      - run: npm install --no-package-lock --no-save --force cypress
+      - name: Cypress run
+        uses: cypress-io/github-action@v4
+        with:
+            install: false
+            command: yarn test:e2e:ganache:ws:${{ matrix.browser }}
+            cache-key: node-v${{ matrix.node }}-on-${{ matrix.browser }}-hash-${{ hashFiles('yarn.lock') }}
+
+<<<<<<<+4.x
+  build-docs:
+    name: Build Docs
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+        matrix:
+            node: [ 18 ]
+    steps:
+        -   uses: actions/setup-node@v3
+            with:
+                node-version: ${{ matrix.node }}
+        -   uses: actions/download-artifact@v3
+            with:
+                name: web3-${{ matrix.node }}.js.tar.gz
+                path: /tmp
+        -   run: tar -xf /tmp/web3-${{ matrix.node }}.js.tar.gz -C ./
+        -   run: yarn build:docs
+=======
+            - name: Send coverage reports to Coveralls
+              if: env.TEST == 'unit_and_e2e_clients'
+              uses: coverallsapp/github-action@master
+              with:
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
+    e2e_windows:
+        needs: e2e
+        runs-on: windows-latest
+        env:
+            TEST: "e2e_windows"
+            INFURA_HTTP: ${{ secrets.INFURA_HTTP }}
+            INFURA_WSS: ${{ secrets.INFURA_WSS }}
+        steps:
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: 16
+            - uses: actions/checkout@v2
+            - run: bash ./scripts/ci.sh
+    eth2:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node: [16, 18]
+        env:
+            TEST: "eth2"
+        steps:
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: ${{ matrix.node }}
+
+            - uses: actions/checkout@v2
+
+            - uses: actions/cache@v2
+              id: cache-deps
+              with:
+                  path: |
+                      node_modules
+                      */*/node_modules
+                  key: ${{ runner.os }}-node${{ matrix.node }}-${{ hashFiles('**/package-lock.json') }}
+
+            - run: npm ci
+              if: steps.cache-deps.outputs.cache-hit != 'true'
+
+            - run: bash ./scripts/ci.sh
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - run: 'echo "No build required"'
+>>>>>>>+origin/1.x
