@@ -3,6 +3,7 @@
 </p>
 
 # web3.js - Net
+[![NPM Package][npm-image]][npm-url]
 
 ![ES Version](https://img.shields.io/badge/ES-2020-yellow)
 ![Node Version](https://img.shields.io/badge/node-14.x-green)
@@ -25,7 +26,13 @@ npm install web3-net
 
 ### Using Yarn
 
+`
 ```bash
+yarn add web3-net
+```
+
+## Usage
+``bash
 yarn add web3-net
 ```
 
@@ -56,4 +63,7 @@ yarn add web3-net
 [repo]: https://github.com/web3/web3.js/tree/4.x/packages/web3-net
 [npm-image]: https://img.shields.io/github/package-json/v/web3/web3.js/4.x?filename=packages%2Fweb3-net%2Fpackage.json
 [npm-url]: https://npmjs.org/package/web3-net
-[downloads-image]: https://img.shields.io/npm/dm/web3-net?label=npm%20downloads
+<<[downloads-image]: https://img.shields.io/npm/dm/web3-net?label=npm%20downloads
+>>>>>>>+4.x
+=====
+>>>>>>> origin/1.x

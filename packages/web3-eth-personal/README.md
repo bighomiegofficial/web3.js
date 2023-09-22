@@ -3,6 +3,7 @@
 </p>
 
 # web3.js - Web3-Eth-Personal
+[![NPM Package][npm-image]][npm-url]
 
 ![ES Version](https://img.shields.io/badge/ES-2020-yellow)
 ![Node Version](https://img.shields.io/badge/node-14.x-green)
@@ -24,6 +25,12 @@ npm install web3-eth-personal
 ```
 
 ### Using Yarn
+
+```bash
+yarn add web3-eth-personal
+```
+
+## Usage
 
 ```bash
 yarn add web3-eth-personal

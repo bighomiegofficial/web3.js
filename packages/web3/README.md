@@ -3,6 +3,9 @@
 </p>
 
 # web3.js
+##### [Web3.js 4.x][4x-release] has been released. Checkout 4.x [API documentation and migration guide][4xdoc] for testing, early feedback and contributions.
+
+[![NPM Package][npm-image]][npm-url]
 
 ![ES Version](https://img.shields.io/badge/ES-2020-yellow)
 ![Node Version](https://img.shields.io/badge/node-14.x-green)
@@ -60,6 +63,7 @@ yarn add web3
 ## Web3.js Packages
 
 We encourage users to use only required individual packages listed in following table, for making lightweight application instead of importing main web3 package, and if you don't need functions from most of the packages that are implicitly included with main web3 package.
+## Types
 
 | Package                                                                                           | Version                                                                                                                                                                           | License                                                                                                               | Docs                                                                                                           | Description                                                                                                   |
 | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
@@ -87,3 +91,5 @@ We encourage users to use only required individual packages listed in following 
 [npm-image]: https://img.shields.io/github/package-json/v/web3/web3.js/4.x?filename=packages%2Fweb3%2Fpackage.json
 [npm-url]: https://npmjs.org/package/web3
 [downloads-image]: https://img.shields.io/npm/dm/web3?label=npm%20downloads
+[4x-release]: https://github.com/ChainSafe/web3.js/releases/tag/v4.0.1-rc.1
+[4xdoc]: https://docs.web3js.org/

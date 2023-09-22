@@ -8,6 +8,9 @@
 ![Node Version](https://img.shields.io/badge/node-14.x-green)
 [![NPM Package][npm-image]][npm-url]
 [![Downloads][downloads-image]][npm-url]
+[![NPM Package][npm-image]][npm-url]
+
+This is a websocket provider sub-package for [web3.js][repo].
 
 This is a sub-package of [web3.js][repo].
 
@@ -24,6 +27,18 @@ npm install web3-providers-ws
 ```
 
 ### Using Yarn
+
+```bash
+yarn add web3-providers-ws
+```
+
+## Usage
+
+```js
+const Web3WsProvider = require('web3-providers-ws');
+
+const options = {
+    timeout: 30000, // ms
 
 ```bash
 yarn add web3-providers-ws

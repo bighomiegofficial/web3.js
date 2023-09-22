@@ -8,6 +8,7 @@
 ![Node Version](https://img.shields.io/badge/node-14.x-green)
 [![NPM Package][npm-image]][npm-url]
 [![Downloads][downloads-image]][npm-url]
+[![NPM Package][npm-image]][npm-url]
 
 This is a sub-package of [web3.js][repo].
 

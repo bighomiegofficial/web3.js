@@ -3,6 +3,7 @@
 </p>
 
 # web3.js - IBAN
+[![NPM Package][npm-image]][npm-url]
 
 ![ES Version](https://img.shields.io/badge/ES-2020-yellow)
 ![Node Version](https://img.shields.io/badge/node-14.x-green)
@@ -24,6 +25,15 @@ npm install web3-eth-iban
 ```
 
 ### Using Yarn
+
+```bash
+yarn add web3-eth-iban
+```
+
+## Usage
+
+```js
+const Web3EthIban = require('web3-eth-iban');
 
 ```bash
 yarn add web3-eth-iban

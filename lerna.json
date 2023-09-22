@@ -4,4 +4,18 @@
   "useWorkspaces": true,
   "version": "independent",
   "packages": ["packages/*", "tools/*"]
+  "version": "1.10.2",
+  "command": {
+    "init": {
+      "exact": true
+    },
+    "publish": {
+      "exact": true,
+      "skipGit": true
+    }
+  },
+  "packages": [
+    "packages/*"
+  ],
+  "useNx": false
 }
