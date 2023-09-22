@@ -1,23 +1,17 @@
-<<<<<<<+4.x
 <p align="center">
   <img src="assets/logo/web3js.jpg" width="300" alt="web3.js" />
-=======
 <p style="text-align: center;">
   <img src="assets/logo/web3js.jpg" width="200" alt="web3.js">
->>>>>>>+origin/1.x
 </p>
 
 # Web3.js
 
-<<<<<<<+4.x
 [![Dependency Status][downloads-image]][npm-url] ![Unit Test Coverage](https://img.shields.io/codecov/c/github/web3/web3.js/4.x?label=unit%20test%20coverage)
 ![Commit Activity](https://img.shields.io/github/commit-activity/m/web3/web3.js/4.x?label=commit%20activity%20on%204.x)
 ![Contributors](https://img.shields.io/github/contributors/web3/web3.js?label=contributors%20on%20all%20branches)
-=======
 [![NPM Package Downloads][npm-image-downloads]][npm-url] [![cdnhits][cdnhits-image]][cdnhits-url] [![Discord][discord-image]][discord-url] [![StackExchange][stackexchange-image]][stackexchange-url] [![NPM Package Version][npm-image-version]][npm-url] [![Build Status][actions-image]][actions-url]  [![Coverage Status][coveralls-image]][coveralls-url] [![Lerna][lerna-image]][lerna-url] [![Netlify Status][netlify-image]][netlify-url] [![GitPOAP Badge][gitpoap-image]][gitpoap-url] [![Twitter][twitter-image]][twitter-url]
 
 #####  [Web3.js 4.x][4x-release] has been released. Checkout 4.x [API documentation and migration guide][4xdoc] for testing, early feedback and contributions. 
->>>>>>>+origin/1.x
 
 ![ES Version](https://img.shields.io/badge/ES-2020-yellow)
 ![Node Version](https://img.shields.io/badge/node-14.x-green)
@@ -27,10 +21,8 @@ Web3.js is a TypeScript implementation of the [Ethereum JSON RPC API](https://et
 ## Installation
 
 You can install the package either using [NPM](https://www.npmjs.com/package/web3) or using [Yarn](https://yarnpkg.com/package/web3)
-<<<<<<<+4.x
 
 > If you wanna checkout latest bugfix or feature, use `npm install web3@dev`
-=======
 
 ### Using NPM
 
@@ -253,7 +245,6 @@ Another variation of this problem was an [issue opned on angular-cli](https://gi
 ## Documentation
 
 Documentation can be found at [ReadTheDocs][docs].
->>>>>>>+origin/1.x
 
 ### Using NPM
 
@@ -267,7 +258,6 @@ npm install web3
 yarn add web3
 ```
 
-<<<<<<<+4.x
 ## Getting Started
 
 -   :writing_hand: If you have questions [submit an issue](https://github.com/ChainSafe/web3.js/issues/new/choose) or join us on [Discord](https://discord.gg/yjyvFRP)
@@ -323,7 +313,6 @@ yarn add web3
 | test             | Uses `jest` to run unit tests in each package                      |
 | test:integration | Uses `jest` to run tests under `/test/integration` in each package |
 | test:unit        | Uses `jest` to run tests under `/test/unit` in each package        |
-=======
 ### Contributing
 
 Please follow the [Contribution Guidelines](./CONTRIBUTIONS.md) and [Review Guidelines](./REVIEW.md).
@@ -344,12 +333,9 @@ This project adheres to the [Release Guidelines](./REVIEW.md).
 -   Python: [Web3.py](https://github.com/ethereum/web3.py)
 -   Ruby: [ethereum.rb](https://github.com/EthWorks/ethereum.rb)
 -   Scala: [web3j-scala](https://github.com/mslinn/web3j-scala)
->>>>>>>+origin/1.x
 
 [npm-url]: https://npmjs.org/package/web3
-<<<<<<<+4.x
 [downloads-image]: https://img.shields.io/npm/dm/web3?label=npm%20downloads
-=======
 [actions-image]: https://github.com/ethereum/web3.js/workflows/Build/badge.svg
 [actions-url]: https://github.com/ethereum/web3.js/actions
 [coveralls-image]: https://coveralls.io/repos/ethereum/web3.js/badge.svg?branch=1.x
@@ -376,4 +362,3 @@ This project adheres to the [Release Guidelines](./REVIEW.md).
 ## Semantic versioning
 
 This project follows [semver](https://semver.org/) as closely as possible **from version 1.3.0 onwards**. Earlier minor version bumps [might](https://github.com/ethereum/web3.js/issues/3758) have included breaking behavior changes.
->>>>>>>+origin/1.x

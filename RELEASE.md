@@ -18,7 +18,6 @@ A patch release only contains required bug fixes with a low risk to impact depen
 
 Further details about versioning can be found in the [semver 2.0.0 specification](https://semver.org/) we follow.
 
-<<<<<<<+4.x
 ## Release Process
 
 ### Running E2E Tests
@@ -57,7 +56,6 @@ Further details about versioning can be found in the [semver 2.0.0 specification
       `npx lerna publish from-package --ignore-scripts --dist-tag rc`
     - lerna will not invoke life cycle scripts before publishing and this will publish all packages to NPM public registry.
 17. Finally if all of above steps are completed successfully, merge release PR into `4.x` branch.
-=======
 ## Release Process Rules
 
 ### Major
@@ -169,4 +167,3 @@ The following describes the steps required to release a new version of `web3.js`
         1.  Pedro from WalletConnect ([@pedrouid](https://github.com/pedrouid))
         1.  Josh from FunFair ([@joshstevens19](https://github.com/joshstevens19))
         1.  Truffle, Gnosis, Aragon, Embark, Alchemy, Buidler, Remix
->>>>>>>+origin/1.x
