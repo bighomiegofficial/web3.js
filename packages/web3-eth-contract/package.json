@@ -1,5 +1,4 @@
 {
-<<<<<<<+4.x
 	"name": "web3-eth-contract",
 	"version": "4.1.0",
 	"description": "Web3 module to interact with Ethereum smart contracts.",
@@ -70,7 +69,6 @@
 		"typescript": "^4.7.4",
 		"web3-eth-accounts": "^4.0.6"
 	}
-=======
     "name": "web3-eth-contract",
     "version": "1.10.2",
     "description": "Web3 module to interact with Ethereum smart contracts.",
@@ -99,5 +97,4 @@
         "dtslint": "^3.4.1",
         "typescript": "4.9.5"
     }
->>>>>>>+origin/1.x
 }

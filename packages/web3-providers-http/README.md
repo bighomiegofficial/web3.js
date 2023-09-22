@@ -2,11 +2,8 @@
   <img src="assets/logo/web3js.jpg" width="500" alt="web3.js" />
 </p>
 
-<<<<<<<+4.x
 # web3.js - Http Provider
-=======
 [![NPM Package][npm-image]][npm-url]
->>>>>>>+origin/1.x
 
 ![ES Version](https://img.shields.io/badge/ES-2020-yellow)
 ![Node Version](https://img.shields.io/badge/node-14.x-green)
@@ -28,15 +25,12 @@ npm install web3-providers-http
 ```
 
 ### Using Yarn
-<<<<<<< 4.x
-=======
 
 ```bash
 yarn add web3-providers-http
 ```
 
 ## Usage
->>>>>>>+origin/1.x
 
 ```bash
 yarn add web3-providers-http
@@ -69,7 +63,4 @@ yarn add web3-providers-http
 [repo]: https://github.com/web3/web3.js/tree/4.x/packages/web3-providers-http
 [npm-image]: https://img.shields.io/github/package-json/v/web3/web3.js/4.x?filename=packages%2Fweb3-providers-http%2Fpackage.json
 [npm-url]: https://npmjs.org/package/web3-providers-http
-<<<<<<<+4.x
 [downloads-image]: https://img.shields.io/npm/dm/web3-providers-http?label=npm%20downloads
-=======
->>>>>>> origin/1.x
